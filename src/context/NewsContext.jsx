@@ -8,7 +8,7 @@ export const APIContextProvider = ({children}) => {
     useEffect(()=>{
         async function fetchnews() {
             try {
-                const response = await fetch(`https://newsapi.org/v2/everything?q=india&language=en&from=2025-08-23&sortBy=publishedAt&apiKey=${apiKey}`)
+                const response = await fetch(`https://newsapi.org/v2/everything?q=india&language=hi&from=2025-08-23&sortBy=publishedAt&apiKey=${apiKey}`)
                     const data = await response.json()
                     setArticles(data.articles)
             } catch (error) {
@@ -17,9 +17,36 @@ export const APIContextProvider = ({children}) => {
         }
         fetchnews()
     },[apiKey]);
+
+    async function fetchByCategories(category) {
+      try{
+      const response = await fetch(
+`https://newsapi.org/v2/everything?q=${category}&language=hi&sortBy=publishedAt&apiKey=${apiKey}`
+  );
+  
+  const data = await response.json();
+  console.log(data);
+  
+  setArticles(data.articles || []);
+ } catch (error) {
+    console.error("Error fetching category news:", error);
+  }
+};
    
+    async function searchNews(query) {
+      if(!query.trim()) return;
+      try {
+        const response = await fetch(
+        `https://newsapi.org/v2/everything?q=${query}&language=hi&sortBy=publishedAt&apiKey=${apiKey}`
+      );
+      const data = await response.json();
+      setArticles(data.articles || [])
+      } catch (error) {
+         console.error("Error searching news:", error);
+      }
+    }
   return (
-    <NewsContext.Provider value={{ articles }}>
+    <NewsContext.Provider value={{ articles,searchNews,fetchByCategories }}>
       {children}
     </NewsContext.Provider>
   );
