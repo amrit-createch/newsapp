@@ -1,8 +1,7 @@
-import { NavLink } from "react-router-dom";
 import { NewsContext } from "../context/NewsContext";
 import { useState,useContext } from "react";
 export default function Header(){
-  const {searchNews,fetchByCategories} = useContext(NewsContext)
+  const {searchNews,fetchByCategories,fetchHomenews} = useContext(NewsContext)
   const [searchTerm,setSearchTerm] = useState('')
 
   const handleSearch = () => {
@@ -17,8 +16,8 @@ export default function Header(){
             </div>
 
          <nav className="flex space-x-6">
-          <button  className="text-gray-700 hover:text-blue-600">Home</button>
-          <button onClick={() => fetchByCategories("politics")} className="text-gray-700 hover:text-blue-600">Politics</button>
+          <button onClick={() => fetchHomenews()} className="text-gray-700 hover:text-blue-600">Home</button>
+          <button onClick={() => fetchByCategories("political")} className="text-gray-700 hover:text-blue-600">Politics</button>
           <button onClick={()=> fetchByCategories("technology")} className="text-gray-700 hover:text-blue-600">Technology</button>
           <button onClick={()=> fetchByCategories("sports")} className="text-gray-700 hover:text-blue-600">Sports</button>
         </nav>
