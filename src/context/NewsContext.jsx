@@ -21,7 +21,7 @@ export const APIContextProvider = ({children}) => {
     async function fetchByCategories(category) {
       try{
       const response = await fetch(
-`https://newsapi.org/v2/everything?q=${category}&language=hi&sortBy=publishedAt&apiKey=${apiKey}`
+      `https://newsapi.org/v2/everything?q=${category}&language=hi&apiKey=${apiKey}`
   );
   
   const data = await response.json();

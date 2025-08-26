@@ -1,6 +1,6 @@
 import React from "react"
 
-function Card({ image, title, url }) {
+function Card({ image, title, url ,author}) {
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden max-w-sm">
       {/* Image */}
@@ -20,6 +20,9 @@ function Card({ image, title, url }) {
           className="inline-block px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700"
         >
           Read Article
+          <p className="text-sm text-white-500">
+          {author ? `By ${author}` : "Unknown Author"}
+           </p>
         </a>
       </div>
     </div>
